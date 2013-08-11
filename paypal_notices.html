@@ -1,0 +1,15 @@
+<template name='paypalNotices'>
+  {{#if has_errors}}
+    <div class='alert alert-error'>
+      <ul>
+        {{#each paypal_notices}}
+          {{> paypalNotice }}
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+</template>
+
+<template name='paypalNotice'>
+  <li>{{message}}</li>
+</template>

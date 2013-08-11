@@ -1,19 +1,13 @@
-//we don't want to store this information on the server
-Meteor.transactions = new Meteor.Collection(null);
-
 Meteor.Paypal = {
-  authorize: function(card_info, payment_info, callback){
-    Meteor.call('paypal_submit', card_info, payment_info, function(err, payment){
-      if(err){
-        console.err(err)
-      } else {
-        console.log('done with the submission');
-      }
-    });
+  //authorize submits a payment authorization to Paypal
+  authorize: function(card_info, payment_info, sess_id, callback){
+    Meteor.call('paypal_submit', card_info, payment_info, sess_id);
   },
+  //config is for the paypal configuration settings.
   config: function(options){
     this.account_options = options;
   },
+  //parseCardData splits up the card data and puts it into a paypal friendly format.
   parseCardData: function(data){
     var card_data = {
       credit_card: {
@@ -27,6 +21,7 @@ Meteor.Paypal = {
       }};
     this.payment_json.payer.funding_instruments.push(card_data);
   },
+  //parsePaymentData splits up the card data and gets it into a paypal friendly format.
   parsePaymentData: function(data){
     var payment_data = {amount: {total: data.total, currency: data.currency}};
     this.payment_json.transactions.push(payment_data);
@@ -34,17 +29,28 @@ Meteor.Paypal = {
 };
 
 if(Meteor.isServer){
+  Meteor.publish('paypal_transactions', function(id){
+    return PaypalTransactions.find({sess_id: id});
+  });
   var paypal_sdk = Npm.require('paypal-rest-sdk');
   Meteor.methods({
-    paypal_submit: function(cardData, paymentData){
-      if(typeof(paypal_sdk) === 'undefined')
-        return;
+    paypal_submit: function(cardData, paymentData, sess_id){
       var config = Meteor.Paypal.account_options;
       paypal_sdk.configure(config);
       Meteor.Paypal.parseCardData(cardData);
       Meteor.Paypal.parsePaymentData(paymentData);
-      paypal_sdk.payment.create(Meteor.Paypal.payment_json, function(err, payment){
-      });
-    }
-  });
-}
+      paypal_sdk.payment.create(Meteor.Paypal.payment_json, Meteor.bindEnvironment(function(err, payment){
+        if (err){
+          console.err(err);
+          PaypalTransactions.insert({sess_id: sess_id, status: 'failed', amount: '0.00', reason: err.reason});
+        } else {
+          console.log('successfully processed payment');
+          PaypalTransactions.insert({sess_id: sess_id, status: 'success', amount: paymentData.total});
+        }
+      },
+      function(e){
+        console.err(e);
+      }));
+  }});
+};
+
