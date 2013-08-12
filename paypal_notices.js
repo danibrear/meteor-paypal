@@ -1,8 +1,8 @@
 Template.paypalNotices.helpers({
   paypal_notices: function(){
-    return Meteor.paypal_transactions.find();
+    return Meteor.PaypalTransactions.find()
   },
   has_errors: function(){
-    return Meteor.paypal_transactions.find().count() > 0;
+    return Meteor.PaypalTransactions.find({status: 'failed'}).count() > 0;
   }
 });

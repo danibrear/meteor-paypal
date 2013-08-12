@@ -30,7 +30,8 @@ Meteor.Paypal = {
 
 if(Meteor.isServer){
   Meteor.publish('paypal_transactions', function(id){
-    return PaypalTransactions.find({sess_id: id});
+    console.log('publishing for id: ' + id);
+    return Meteor.PaypalTransactions.find({sess_id: id});
   });
   var paypal_sdk = Npm.require('paypal-rest-sdk');
   Meteor.methods({
@@ -41,16 +42,14 @@ if(Meteor.isServer){
       Meteor.Paypal.parsePaymentData(paymentData);
       paypal_sdk.payment.create(Meteor.Paypal.payment_json, Meteor.bindEnvironment(function(err, payment){
         if (err){
-          console.err(err);
-          PaypalTransactions.insert({sess_id: sess_id, status: 'failed', amount: '0.00', reason: err.reason});
+          Meteor.PaypalTransactions.insert({sess_id: sess_id, status: 'failed', amount: '0.00', reason: err.reason, seen: false});
         } else {
-          console.log('successfully processed payment');
-          PaypalTransactions.insert({sess_id: sess_id, status: 'success', amount: paymentData.total});
+          Meteor.PaypalTransactions.insert({sess_id: sess_id, status: 'success', amount: paymentData.total, seen: false});
         }
       },
       function(e){
-        console.err(e);
+        console.error(e);
       }));
   }});
-};
+}
 

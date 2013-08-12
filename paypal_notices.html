@@ -1,13 +1,11 @@
 <template name='paypalNotices'>
-  {{#if has_errors}}
-    <div class='alert alert-error'>
-      <ul>
-        {{#each paypal_notices}}
-          {{> paypalNotice }}
-        {{/each}}
-      </ul>
-    </div>
-  {{/if}}
+  <div class='alert alert-error'>
+    <ul>
+      {{#each paypal_notices}}
+        {{> paypalNotice }}
+      {{/each}}
+    </ul>
+  </div>
 </template>
 
 <template name='paypalNotice'>
