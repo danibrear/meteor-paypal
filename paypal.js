@@ -45,9 +45,7 @@
   };
 
   if(Meteor.isServer){
-    console.log('hello world');
     Meteor.startup(function(){
-      console.log('using paypal meteor package');
       var paypal_sdk = Npm.require('paypal-rest-sdk');
       var Fiber = Npm.require('fibers');
       var Future = Npm.require('fibers/future');
