@@ -3,7 +3,7 @@
     "description": "Paypal integration for Meteor making payments and authorizations easier.",
     "homepage": "https://github.com/davidbrear/meteor-paypal.git",
     "author": "David Brear",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "git": "https://github.com/davidbrear/meteor-paypal.git",
     "packages": {
         "npm": {}
