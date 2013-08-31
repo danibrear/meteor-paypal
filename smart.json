@@ -1,0 +1,11 @@
+{
+    "name": "paypal",
+    "description": "Paypal for Meteor",
+    "homepage": "https://github.com/davidbrear/meteor-paypal.git",
+    "author": "David Brear",
+    "version": "1.0.0",
+    "git": "https://github.com/davidbrear/meteor-paypal.git",
+    "packages": {
+        "npm": {}
+    }
+}
