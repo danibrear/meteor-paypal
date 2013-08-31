@@ -5,13 +5,10 @@ Meteor Package for Paypal integration
 
 ### Requirements
   * MRT
-  * NPM - mrt add npm
 
 ### Usage
 ```console
-mrt add npm
-#clone into your packages directory
-cd packages && git clone http://github.com/davidbrear/meteor-paypal
+mrt add paypal
 ```
 
 In your callback method:

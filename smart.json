@@ -1,11 +1,9 @@
 {
     "name": "paypal",
     "description": "Paypal integration for Meteor making payments and authorizations easier.",
-    "homepage": "https://github.com/davidbrear/meteor-paypal",
+    "homepage": "https://github.com/DavidBrear/meteor-paypal",
     "author": "David Brear",
-    "version": "1.0.3",
-    "git": "https://github.com/davidbrear/meteor-paypal.git",
-    "packages": {
-        "npm": {}
-    }
+    "version": "1.0.4",
+    "git": "https://github.com/DavidBrear/meteor-paypal.git",
+    "packages": {}
 }
