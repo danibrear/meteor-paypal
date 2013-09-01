@@ -3,15 +3,15 @@ meteor-paypal
 
 Meteor Package for Paypal integration
 
-### Requirements
-  * MRT
-
 ### Usage
 ```console
 mrt add paypal
 ```
 
 #### Basic
+
+Format is `Meteor.Paypal.*transaction_type*({ {/*card data*/}, {/*transaction data*/}, function(err, res){...})`
+
 ```javascript
   Meteor.Paypal.authorize({
       name: 'Buster Bluth',
@@ -33,7 +33,27 @@ mrt add paypal
     });
 ```
 
-Payment options are: `Meteor.Paypal.authorize` and
+For information on the **payment** object returned see [Paypal's Payment Option Documentation](https://developer.paypal.com/webapps/developer/docs/api/#common-payments-objects)
+
+Transaction types are: `Meteor.Paypal.authorize` and
 `Meteor.Paypal.purchase` for the difference, see [Paypal's
 Documentation](https://developer.paypal.com/webapps/developer/docs/api/#payments)
-#### 
+#### Extras
+
+Include `{{> paypalCreditCardForm }}` in a template. In the template's javascript file, include: 
+``` javascript
+  Template.paypalCreditCardForm.events({
+    'submit #paypal-payment-form': function(evt, tmp){
+      evt.preventDefault();
+      
+      var card_data = Template.paypalCreditCardForm.card_data();
+      
+      //Probably a good idea to disable the submit button here to prevent multiple submissions.
+      
+      Meteor.Paypal.purchase(card_data, {total: '100.50', currency: 'USD'}, function(err, results){
+        if (err) console.error(err);
+        else console.log(results);
+      });
+    }
+  });
+```
