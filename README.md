@@ -32,6 +32,7 @@ Format is `Meteor.Paypal.*transaction_type*({ {/*card data*/}, {/*transaction da
   Meteor.Paypal.authorize({
       name: 'Buster Bluth',
       number: '4111111111111111',
+      type: 'visa',
       cvv2: '123',
       expire_year: '2015',
       expire_month: '01'
