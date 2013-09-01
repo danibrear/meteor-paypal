@@ -32,3 +32,8 @@ mrt add paypal
         // and a payment object with information about the transaction
     });
 ```
+
+Payment options are: `Meteor.Paypal.authorize` and
+`Meteor.Paypal.purchase` for the difference, see [Paypal's
+Documentation](https://developer.paypal.com/webapps/developer/docs/api/#payments)
+#### 
