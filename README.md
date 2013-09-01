@@ -1,7 +1,7 @@
-meteor-paypal
+Paypal for Meteor
 =============
 
-Meteor Package for Paypal integration
+Meteor Package for easy Paypal payment processing.
 
 ### Usage
 ```console
@@ -76,3 +76,7 @@ Include `{{> paypalCreditCardForm }}` in a template. In the template's javascrip
     }
   });
 ```
+
+### Acknowledgements
+
+Special Thanks to Phillip Jacobs ([@phillyqueso](https://twitter.com/phillyqueso)) for his help with Fibers and Futures without which, this project would've failed.
