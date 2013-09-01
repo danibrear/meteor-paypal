@@ -11,10 +11,24 @@ Meteor Package for Paypal integration
 mrt add paypal
 ```
 
-In your callback method:
+#### Basic
 ```javascript
-Meteor.subscribe('paypal_transactions', unique_session_id);
-Meteor.Paypal.authorize({/*credit card info (number, cvv2, etc...)*/}, 
-    {/*payment info (amount, currency)*/}, 
-    unique_session_id);
+  Meteor.Paypal.authorize({
+      name: 'Buster Bluth',
+      number: '4111111111111111',
+      cvv2: '123',
+      expire_year: '2015',
+      expire_month: '01'
+    },
+    {
+      total: '100.10',
+      currency: 'USD'
+    },
+    function(error, results){
+      if(error)
+        //Deal with Error
+      else
+        //results contains boolean for saved
+        // and a payment object with information about the transaction
+    });
 ```
