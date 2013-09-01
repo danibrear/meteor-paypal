@@ -30,7 +30,7 @@ Meteor.Paypal = {
     }
     return {
       credit_card: {
-        type: 'visa',
+        type: data.type,
         number: data.number,
         first_name: first_name,
         last_name: last_name,

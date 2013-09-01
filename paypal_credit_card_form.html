@@ -5,7 +5,17 @@
 		  <input type='text' class='form-control' name='name' id='name' placeholder='Name on card'/>
 		</div>
 		<div class='form-group'>
-		  <label for='credit_card'>Credit Card</label>
+		  <label for='card_type'>Card Type</label>
+		  <select name='card_type' id='card-type'>
+		  	<option selected="selected">Card Type</option>
+		    <option value='visa'> Visa </option>
+		    <option value='mastercard'> Mastercard </option>
+		    <option value='americanexpress'> American Express </option>
+		    <option value='discover'> Discover </option>
+		  </select>
+		</div>
+		<div class='form-group'>
+		  <label for='credit_card'>Card Number</label>
 		  <input type='text' class='form-control' name='card_number' id='card-number' placeholder='XXXX XXXX XXXX XXXX'/>
 		</div>
 		<div class='form-group'>
