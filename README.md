@@ -8,6 +8,22 @@ Meteor Package for Paypal integration
 mrt add paypal
 ```
 
+#### Setup
+
+If you haven't already, sign up for a developer account at: [https://developer.paypal.com/](https://developer.paypal.com/)
+
+Create a sandbox application and copy your *REST API CREDENTIALS*.
+
+Create a file `server/paypal_config.js` including:
+``` javascript
+  Meteor.Paypal.config = {
+    'host': 'api.sandbox.paypal.com',
+    'port': '',
+    'client_id': 'Your Paypal Client Id',
+    'client_secret': 'Your Paypal Client Secret'
+  }
+```
+
 #### Basic
 
 Format is `Meteor.Paypal.*transaction_type*({ {/*card data*/}, {/*transaction data*/}, function(err, res){...})`
@@ -28,8 +44,10 @@ Format is `Meteor.Paypal.*transaction_type*({ {/*card data*/}, {/*transaction da
       if(error)
         //Deal with Error
       else
-        //results contains boolean for saved
-        // and a payment object with information about the transaction
+        //results contains:
+        //  saved (true or false)
+        //  if false: "error" contains the reasons for failure
+        //  if true: "payment" contains the transaction information
     });
 ```
 
