@@ -55,7 +55,12 @@ if(Meteor.isServer){
         paypal_sdk.configure(Meteor.Paypal.account_options);
         var payment_json = Meteor.Paypal.payment_json();
         payment_json.intent = transaction_type;
-        payment_json.payer.funding_instruments.push(Meteor.Paypal.parseCardData(cardData));
+        if(cardData == null) {
+          payment_json.payer.payment_method = 'paypal';
+          delete payment_json.funding_instruments;
+        } else {
+          payment_json.payer.funding_instruments.push(Meteor.Paypal.parseCardData(cardData));
+        }
         payment_json.transactions.push(Meteor.Paypal.parsePaymentData(paymentData));
         var fut = new Future();
         this.unblock();
