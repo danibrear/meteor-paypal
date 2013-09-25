@@ -56,8 +56,10 @@ if(Meteor.isServer){
         var payment_json = Meteor.Paypal.payment_json();
         payment_json.intent = transaction_type;
         if(cardData == null) {
-          payment_json.payer.payment_method = 'paypal';
-          delete payment_json.funding_instruments;
+          payment_json.payer = {
+            payment_method: 'paypal'
+          };
+          payment_json.redirect_urls = Meteor.Paypal.account_options.redirect_urls;
         } else {
           payment_json.payer.funding_instruments.push(Meteor.Paypal.parseCardData(cardData));
         }
