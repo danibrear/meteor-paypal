@@ -78,6 +78,11 @@ if(Meteor.isServer){
         }));
         return fut.wait();
     }});
+    // this is not a method because it should really only be
+    // called by server-side code
+    Meteor.Paypal.execute = function execute(payment_id, payer_id, callback) {
+      paypal_sdk.payment.execute(payment_id, {payer_id: payer_id}, Meteor.Paypal.account_options, callback);
+    };
   });
 }
 
