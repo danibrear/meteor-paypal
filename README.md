@@ -16,12 +16,12 @@ Create a sandbox application and copy your *REST API CREDENTIALS*.
 
 Create a file `server/paypal_config.js` including:
 ``` javascript
-  Meteor.Paypal.config = {
+  Meteor.Paypal.config({
     'host': 'api.sandbox.paypal.com',
     'port': '',
     'client_id': 'Your Paypal Client Id',
     'client_secret': 'Your Paypal Client Secret'
-  }
+  });
 ```
 
 #### Basic
