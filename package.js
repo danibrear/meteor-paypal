@@ -1,8 +1,8 @@
 Package.describe({
 	summary: "A paypal package that helps make restful API calls to Paypal",
-	version: "1.0.0",
+	version: "1.0.1",
 	name: "limemakers:paypal",
-	git: "https://github.com/LimeMakers/meteor-three.git"
+	git: "https://github.com/LimeMakers/meteor-paypal.git"
 });
 
 Npm.depends({
