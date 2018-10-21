@@ -1,6 +1,8 @@
 Paypal for Meteor
 =============
 
+## This project is archived because I am not able to maintain it anymore due to time restrictions and I no longer write using MeteorJS. If you want to make changes please fork the repo.
+
 Meteor Package for easy Paypal payment processing.
 
 ### Usage
